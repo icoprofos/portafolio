@@ -1,0 +1,336 @@
+
+<!--
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>Hello, World!</title>
+</head>
+<body>
+  <h1>
+    Hello, World!
+  </h1>
+</body>
+</html>-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Rendimiento General</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Serene Neutral -->
+    <!-- Application Structure Plan: Se ha diseñado un dashboard de una sola página con una estructura de cuadrícula (grid) flexible y adaptable. La arquitectura sigue un flujo de 'vista general a detalle': comienza con KPIs (Indicadores Clave de Rendimiento) globales en la parte superior para una visión rápida. Luego, se presentan secciones temáticas para un análisis más profundo: rendimiento de ventas a lo largo del tiempo, distribución de usuarios y desglose regional. Finalmente, una tabla detallada permite la exploración granular de los datos. Se eligió esta estructura porque es un estándar en inteligencia de negocios que facilita al usuario la comprensión rápida del estado general y le permite investigar áreas específicas de interés de manera intuitiva y sin fricción. -->
+    <!-- Visualization & Content Choices: 
+        - KPIs Globales -> Meta: Informar -> Presentación: Tarjetas con cifras grandes (HTML/Tailwind) -> Interacción: Hover para contexto -> Justificación: Acceso inmediato a las métricas más críticas.
+        - Tendencia de Ingresos -> Meta: Analizar Cambio -> Presentación: Gráfico de Líneas (Chart.js/Canvas) -> Interacción: Filtros por período (trimestre/mes) -> Justificación: Visualiza patrones y tendencias a lo largo del tiempo, la interacción permite cambiar el enfoque del análisis.
+        - Usuarios Activos -> Meta: Comparar -> Presentación: Gráfico de Barras (Chart.js/Canvas) -> Interacción: Tooltips con datos exactos -> Justificación: Comparación clara y directa entre diferentes categorías (plataformas).
+        - Distribución Regional -> Meta: Comparar Proporciones -> Presentación: Gráfico de Anillo (Chart.js/Canvas) -> Interacción: Tooltips -> Justificación: Muestra eficazmente la contribución de cada parte a un todo.
+        - Tabla de Productos -> Meta: Organizar/Explorar -> Presentación: Tabla HTML -> Interacción: No implementada en esta versión, pero preparada para filtros/ordenamiento -> Justificación: Ofrece el nivel de detalle más profundo para un análisis granular.
+        - Se utiliza Chart.js sobre Canvas por su interactividad, rendimiento y excelente soporte responsive. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-6 lg:p-8">
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Dashboard de Rendimiento General</h1>
+            <p class="text-md text-gray-500 mt-1">Análisis interactivo del último trimestre.</p>
+        </header>
+
+        <main>
+            <section id="kpis" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="card p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-semibold text-gray-500">Ingresos Totales</h3>
+                        <p class="text-3xl font-bold my-2">$450,234.89</p>
+                    </div>
+                    <p class="text-sm text-green-600">+12.5% vs. trimestre anterior</p>
+                </div>
+                <div class="card p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-semibold text-gray-500">Nuevos Usuarios</h3>
+                        <p class="text-3xl font-bold my-2">1,820</p>
+                    </div>
+                    <p class="text-sm text-green-600">+8.2% vs. trimestre anterior</p>
+                </div>
+                <div class="card p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-semibold text-gray-500">Tasa de Conversión</h3>
+                        <p class="text-3xl font-bold my-2">4.15%</p>
+                    </div>
+                    <p class="text-sm text-red-600">-0.5% vs. trimestre anterior</p>
+                </div>
+                <div class="card p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-semibold text-gray-500">Ventas Promedio</h3>
+                        <p class="text-3xl font-bold my-2">$247.38</p>
+                    </div>
+                    <p class="text-sm text-green-600">+$15.20 vs. trimestre anterior</p>
+                </div>
+            </section>
+
+            <section id="main-charts" class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                <div class="card lg:col-span-2 p-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
+                        <div>
+                           <h2 class="text-xl font-bold">Tendencia de Ingresos</h2>
+                           <p class="text-sm text-gray-500">Evolución de los ingresos generados.</p>
+                        </div>
+                        <div class="mt-4 sm:mt-0">
+                            <button id="filter-quarter" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium">Trimestral</button>
+                            <button id="filter-month" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm font-medium ml-2">Mensual</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <h2 class="text-xl font-bold mb-1">Distribución Regional</h2>
+                    <p class="text-sm text-gray-500 mb-4">Porcentaje de ventas por cada región.</p>
+                    <div class="chart-container">
+                        <canvas id="regionChart"></canvas>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="secondary-charts" class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                 <div class="card lg:col-span-2 p-6">
+                    <h2 class="text-xl font-bold mb-1">Usuarios Activos por Plataforma</h2>
+                    <p class="text-sm text-gray-500 mb-4">Comparativa de usuarios en Web, iOS y Android.</p>
+                    <div class="chart-container">
+                        <canvas id="usersChart"></canvas>
+                    </div>
+                </div>
+                <div class="card lg:col-span-3 p-6">
+                    <h2 class="text-xl font-bold mb-1">Rendimiento de Productos</h2>
+                    <p class="text-sm text-gray-500 mb-4">Ventas y unidades por producto principal.</p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-500">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">Producto</th>
+                                    <th scope="col" class="px-6 py-3">Unidades Vendidas</th>
+                                    <th scope="col" class="px-6 py-3">Ingresos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Producto Alfa</th>
+                                    <td class="px-6 py-4">1,204</td>
+                                    <td class="px-6 py-4">$150,500.00</td>
+                                </tr>
+                                <tr class="bg-white border-b">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Producto Beta</th>
+                                    <td class="px-6 py-4">980</td>
+                                    <td class="px-6 py-4">$117,600.00</td>
+                                </tr>
+                                <tr class="bg-white border-b">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Producto Gamma</th>
+                                    <td class="px-6 py-4">750</td>
+                                    <td class="px-6 py-4">$93,750.00</td>
+                                </tr>
+                                <tr class="bg-white">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Producto Delta</th>
+                                    <td class="px-6 py-4">560</td>
+                                    <td class="px-6 py-4">$88,384.89</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 py-4 border-t">
+            <p class="text-sm text-gray-500">&copy; 2025 Mi Empresa. Dashboard Interactivo.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const chartColors = {
+                primary: 'rgba(79, 70, 229, 1)',
+                primaryTransparent: 'rgba(79, 70, 229, 0.2)',
+                secondary: 'rgba(234, 179, 8, 1)',
+                tertiary: 'rgba(34, 197, 94, 1)',
+                grey: 'rgba(107, 114, 128, 1)',
+                pie: ['rgba(79, 70, 229, 0.8)', 'rgba(5, 150, 105, 0.8)', 'rgba(217, 70, 239, 0.8)', 'rgba(245, 158, 11, 0.8)']
+            };
+
+            const commonChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            boxWidth: 12,
+                            font: {
+                                family: "'Inter', sans-serif"
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: {
+                           font: { family: "'Inter', sans-serif" }
+                        }
+                    },
+                    y: {
+                        border: { dash: [4, 4] },
+                        grid: { color: '#e5e7eb' },
+                        ticks: {
+                           font: { family: "'Inter', sans-serif" }
+                        }
+                    }
+                }
+            };
+            
+            const dataQuarter = {
+                labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5', 'Semana 6', 'Semana 7', 'Semana 8', 'Semana 9', 'Semana 10', 'Semana 11', 'Semana 12'],
+                datasets: [{
+                    label: 'Ingresos Trimestrales',
+                    data: [25000, 28000, 32000, 30000, 35000, 40000, 42000, 38000, 45000, 48000, 52000, 55000],
+                    borderColor: chartColors.primary,
+                    backgroundColor: chartColors.primaryTransparent,
+                    fill: true,
+                    tension: 0.4
+                }]
+            };
+
+            const dataMonth = {
+                labels: ['Semana 9', 'Semana 10', 'Semana 11', 'Semana 12'],
+                datasets: [{
+                    label: 'Ingresos Mensuales',
+                    data: [45000, 48000, 52000, 55000],
+                    borderColor: chartColors.primary,
+                    backgroundColor: chartColors.primaryTransparent,
+                    fill: true,
+                    tension: 0.4
+                }]
+            };
+
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            let revenueChart = new Chart(revenueCtx, {
+                type: 'line',
+                data: dataQuarter,
+                options: commonChartOptions
+            });
+            
+            const filterQuarterBtn = document.getElementById('filter-quarter');
+            const filterMonthBtn = document.getElementById('filter-month');
+            
+            filterQuarterBtn.addEventListener('click', () => {
+                revenueChart.data = dataQuarter;
+                revenueChart.update();
+                filterQuarterBtn.classList.replace('bg-gray-200', 'bg-indigo-600');
+                filterQuarterBtn.classList.replace('text-gray-700', 'text-white');
+                filterMonthBtn.classList.replace('bg-indigo-600', 'bg-gray-200');
+                filterMonthBtn.classList.replace('text-white', 'text-gray-700');
+            });
+
+            filterMonthBtn.addEventListener('click', () => {
+                revenueChart.data = dataMonth;
+                revenueChart.update();
+                filterMonthBtn.classList.replace('bg-gray-200', 'bg-indigo-600');
+                filterMonthBtn.classList.replace('text-gray-700', 'text-white');
+                filterQuarterBtn.classList.replace('bg-indigo-600', 'bg-gray-200');
+                filterQuarterBtn.classList.replace('text-white', 'text-gray-700');
+            });
+
+
+            const regionCtx = document.getElementById('regionChart').getContext('2d');
+            const regionChart = new Chart(regionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Norte', 'Sur', 'Este', 'Oeste'],
+                    datasets: [{
+                        label: 'Ventas por Región',
+                        data: [150080, 112560, 90048, 97546.89],
+                        backgroundColor: chartColors.pie,
+                        borderColor: '#ffffff',
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                           position: 'right'
+                        }
+                    }
+                }
+            });
+
+            const usersCtx = document.getElementById('usersChart').getContext('2d');
+            const usersChart = new Chart(usersCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Enero', 'Febrero', 'Marzo'],
+                    datasets: [
+                        {
+                            label: 'Web',
+                            data: [12000, 15000, 18000],
+                            backgroundColor: chartColors.primary,
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'iOS',
+                            data: [8000, 9500, 11000],
+                            backgroundColor: chartColors.tertiary,
+                            borderRadius: 4
+                        },
+                         {
+                            label: 'Android',
+                            data: [10000, 11000, 13000],
+                            backgroundColor: chartColors.grey,
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: commonChartOptions
+            });
+        });
+    </script>
+</body>
+</html>
