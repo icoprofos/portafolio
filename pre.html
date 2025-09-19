@@ -1,0 +1,589 @@
+
+
+<!DOCTYPE html>
+
+<html lang="Es-es">
+<head>
+<meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Recuerdos Preciados</title>
+
+
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OHANA- FAMILY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Gray, Blue & White -->
+    <!-- Application Structure Plan: La 
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            /*overflow: hidden;*/
+            font-family: sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .scroll-container {
+            width: 100%;
+            height: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+        }
+
+        .scroll-item {
+            scroll-snap-align: center;
+        }
+
+
+      /*    body {
+      background: linear-gradient(135deg, #D53BFFD1 0%, ##FFFFFF 100%);
+      height: 1280px;
+    min-height: 1200px;
+  font-family: Arial, sans-serif;
+      min-height: ;
+      margin: 10px 10px 10px 10px;
+    max-width:99vh;
+      width: 1080px;
+      padding: 5px 10px 10px 10px;
+      /*escale:0.9;*/
+    }
+    .navbar {
+      margin: 0;
+      top: 0;
+      font-size: 1.5em;
+    }
+    
+    .navbar,
+    .footer {
+      background: linear-gradient(90deg, #97FFDE 0%, #BBDBFFDE 100%);
+      color: #000000;
+      box-shadow: 0 2px 8px rgba(106, 223, 153, 0.18);
+      border-radius: 0 0 14px 14px;
+     padding: 12px 24px;      display: flex;    
+     align-items: center;
+    justify-content: space-between;
+      max-height: 50px;
+      position: fixed;
+      max-width: 9ñ;
+      left: 0;
+      right: 0;
+      z-index: 10;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      font-size: 0.95em;
+    }
+
+   .container {
+      padding: 80px 16px 60px 16px;
+      max-width: 120%;
+      margin: 0 auto;
+    }
+
+    .menu-btn,
+    .logout-btn,
+    .open-sidebar-btn {
+      background: linear-gradient(90deg, #873AEA 0%, #7AFCFF 100%);
+      color: #232323;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(245, 72, 72, 1);
+      padding: 10px 14px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 4px 4px;
+      font-size: .5em;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .menu-btn:hover,
+    .logout-btn:hover,
+    .open-sidebar-btn:hover {
+      background: linear-gradient(90deg, #FFD2007D 0%, #F7971E 100%);
+      box-shadow: 4px 4px 12px rgba(60, 60, 60, 0.22);
+    }
+
+    .menu-btn.active {
+      background: #4EBC76A6;
+    }
+
+    .card {
+      background: linear-gradient(120deg, #29DB7C99 0%, #06A5B8B3 100%);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(75, 6, 79, 0.45), 0 1.5px 6px rgba(215, 100, 197, 0.77);
+      border: none;
+      margin: 16px 0;
+      padding: 20px 14px;
+      display: flex;
+      max-width:80%;
+      width:80%;
+      flex-direction: column;
+      
+      gap: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      height: 100vh;
+      max-height:100%;
+    }
+
+    .card:hover {
+      transform: scale(1.04) translateY(-2px);
+      box-shadow: 0 16px 40px rgba(30, 41, 59, 0.32), 0 3px 12px rgba(0, 0, 0, 0.18);
+    }
+
+    .card h3 {
+      margin: 0 0 8px 0;
+      color: #5C6AC4;
+    }
+
+    .card a {
+      color: #3b82f6;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+    .card iframe {
+      width:90%;
+      height:900px;
+    }
+    .searchContent {
+      background: linear-gradient(#7AFCFF, #AF19FF);
+      padding: 4px 5px 7px;
+      
+    }
+    .searchInput {
+      margin:1px 1px 1px;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 220px;
+      height: 100vh;
+      background: linear-gradient(135deg, #AE6DCF57 0%, #2A61B936 100%);
+      box-shadow: 2px 0 14px rgba(102, 174, 183, 0.43);
+      border-radius: 0 18px 18px 0;
+      padding: 24px 0;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transform: translateX(-100%);
+      transition: transform 0.5s;
+    }
+
+    .sidebar.active {
+      transform: translateX(0);
+    }
+
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.2);
+      z-index: 19;
+      display: none;
+    }
+
+    .sidebar-overlay.active {
+      display: block;
+    }
+
+    .open-sidebar-btn {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 30;
+      width:70px;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.6em;
+      cursor: pointer;
+      align-self: flex-end;
+      margin-right: 14px;
+    }
+
+    </style>
+										<!--
+</head>
+-->
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: sans-serif;
+            background-color: #f3f4f6;
+            scroll-behavior: smooth;
+        }
+
+        .scroll-container {
+            width: 100%;
+            height: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+        }
+
+        .scroll-item {
+            scroll-snap-align: center;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+        }
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen">
+	 
+    <script>
+        const scrollContainer = document.querySelector('.scroll-container');
+        const mainContent = document.getElementById('main-content');
+        
+        if (scrollContainer) {
+            window.onload = () => {
+                scrollContainer.scrollLeft = mainContent.offsetLeft;
+            };
+        }
+    </script>
+    <!-- Desktop: Layout de 3 columnas -->
+    <div class="hidden md:grid md:grid-cols-[280px_1fr_280px] h-full">
+        <aside class="w-full bg-gray-800 text-white p-6 shadow-lg overflow-y-auto">
+            <h2 class="text-xl font-bold mb-4">Menú</h2>
+            <nav>
+                <ul>
+                    <li class="mb-2"><a href="#dashboard" class="text-blue-300 hover:text-blue-100">Dashboard</a></li>
+                    <li class="mb-2"><a href="#galeria" class="text-blue-300 hover:text-blue-100">Galería de Recuerdos</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="w-full h-full p-8 overflow-y-auto">
+            <div id="dashboard" class="max-w-4xl mx-auto mb-12">
+                <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
+                <p class="text-gray-700 leading-relaxed">Bienvenido a tu panel de control. Aquí puedes ver un resumen de los datos y la información clave de tu proyecto.</p>
+                <div class="mt-8 h-96 bg-white rounded-lg shadow-md p-6 flex items-center justify-center">
+                    <p class="text-gray-500 text-center">Aquí van los gráficos y datos de tu dashboard.</p>
+              
+   </div>
+            </div>                  
+   
+         <div id="galeria" class="max-w-4xl mx-auto">
+                <h1 class="text-3xl font-bold mb-4">Recuerdos</h1>
+                <p class="text-gray-700 leading-relaxed mb-6">Un espacio dedicado a los momentos especiales que compartiste, mostrados de manera cronológica.</p>
+                
+          <!-- 1-->     <div id="gallery-container" class="relative w-full overflow-hidden rounded-lg shadow-lg bg-gray-100">
+    <!-- 1-->                   <div id="gallery-track" class="flex transition-transform duration-500 ease-in-out">
+    <!-- 1-->                       <!-- Tarjeta 1: Cumpleaños de la abuelita (14 de Julio) -->
+     <!-- 1-->                      <div class="gallery-item flex-shrink-0 w-full p-6 text-center">
+      <!-- 1-->                         <h2 class="text-2xl font-semibold text-gray-800 mb-4">14 de Julio - Cumpleaños de la Abuelita</h2>
+                            <p class="text-sm text-gray-600 mb-6">Un día lleno de alegría y amor para celebrar un año más de vida.</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <img src="images/14 de 07 de 2025_foto1.jpg" alt="Cumpleaños de la abuelita" class="w-full h-auto rounded-lg shadow-md">
+                                <img src="images/14 de 07 de 2025_foto2.jpg" alt="Cumpleaños de la abuelita" class="w-full h-auto rounded-lg shadow-md">
+      <!-- 1-->                             <div class="video-wrapper">
+                                    <video controls class="w-full h-full rounded-lg shadow-md">
+                                        <source src="images/14 de 07 de 2025_video.mp4" type="video/mp4">
+                                        Tu navegador no soporta el tag de video.
+                                    </video>
+        <!-- 1-->                         </div>
+	  <!-- 1--> 					</div>
+      <!-- 1-->               </div>
+                                    
+                                    
+                                    
+                        
+                        <!-- Tarjeta 2: Mi Cumpleaños (5 de Septiembre) -->
+                                    
+                                    
+                        <div class="gallery-item flex-shrink-0 w-full p-6 text-center">
+                            <h2 class="text-2xl font-semibold text-gray-800 mb-4">5 de Septiembre - Mi Cumpleaños</h2>
+                            <p class="text-sm text-gray-600 mb-6">Momentos inolvidables compartidos con las personas que más quiero en mi día.</p>
+                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <img src="images/05 de 09 de 2025_foto1.jpg" alt="Mi Cumpleaños" class="w-full h-auto rounded-lg shadow-md">
+                                <div class="video-wrapper">
+                                     <video controls class="w-full h-full rounded-lg shadow-md">
+                                        <source src="images/05 de 09 de 2025_video.mp4" type="video/mp4">
+                                        Tu navegador no soporta el tag de video.
+                                    </video>
+                                </div>
+                                <img src="images/05 de 09 de 2025_foto2.jpg" alt="Mi Cumpleaños" class="w-full h-auto rounded-lg shadow-md">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="prevBtn" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-200 focus:outline-none">
+                        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="nextBtn" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-200 focus:outline-none">
+                        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                                
+                                
+                                
+                                         </div>
+                        </div>
+                    </main>
+
+                                
+                                
+                                
+        <aside class="w-full bg-gray-200 p-6 shadow-lg overflow-y-auto">
+            <h2 class="text-xl font-bold mb-4">Menú Derecho</h2>
+            <div class="bg-white rounded-lg p-4 shadow-md mb-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">El Valor del Programador</h3>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                    El profesionalismo y la ética de un programador se basan en reglas, principios y normas que siempre hay que seguir. En el momento en que un programador captura informáticamente en código situaciones de la vida real o cómo resolver problemas, debido a que no solo involucra matemáticas, álgebra e incluso más allá de la filosofía, captura mucho más que solo datos.
+                </p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Mobile: Layout de 3 paneles con scroll horizontal -->
+    <div id="mobile-layout" class="md:hidden w-screen h-full flex flex-row flex-nowrap scroll-container">
+        <div id="left-aside" class="scroll-item w-[80vw] bg-gray-800 text-white p-6 flex-shrink-0">
+            <h2 class="text-xl font-bold mb-4">Menú</h2>
+            <nav>
+                <ul>
+                    <li class="mb-2"><a href="#" onclick="scrollToSection('main-content')" class="text-blue-300 hover:text-blue-100">Dashboard</a></li>
+                    <li class="mb-2"><a href="#" onclick="scrollToSection('galeria-mobile')" class="text-blue-300 hover:text-blue-100">Galería</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <main id="main-content" class="scroll-item w-screen p-8 overflow-y-auto flex-shrink-0">
+            <div id="dashboard-mobile" class="mb-12">
+                <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
+                <p class="text-gray-700 leading-relaxed">Bienvenido a tu panel de control.</p>
+                <div class="mt-8 h-96 bg-white rounded-lg shadow-md p-6 flex items-center justify-center">
+                    <p class="text-gray-500 text-center">Aquí van los gráficos.</p>
+                </div>
+            </div>
+            
+            <div id="galeria-mobile" class="max-w-4xl mx-auto">
+                <h1 class="text-3xl font-bold mb-4">Recuerdos</h1>
+                <p class="text-gray-700 leading-relaxed mb-6">Momentos especiales con ella.</p>
+                <div id="gallery-container-mobile" class="relative w-full overflow-hidden rounded-lg shadow-lg bg-gray-100">
+                    <div id="gallery-track-mobile" class="flex transition-transform duration-500 ease-in-out">
+                        <!-- Tarjeta 1: Cumpleaños de la abuelita (14 de Julio) -->
+                        <div class="gallery-item-mobile flex-shrink-0 w-full p-6 text-center">
+                            <h2 class="text-2xl font-semibold text-gray-800 mb-4">14 de Julio</h2>
+                            <p class="text-sm text-gray-600 mb-6">Cumpleaños de la Abuelita</p>
+                            <img src="images/14 de 07 de 2025_foto1.jpg" alt="Cumpleaños de la abuelita" class="w-full h-auto rounded-lg shadow-md">
+                            <div class="video-wrapper mt-4">
+                                <video controls class="w-full h-full rounded-lg shadow-md">
+                                    <source src="images/14 de 07 de 2025_video.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        <!-- Tarjeta 2: Mi Cumpleaños (5 de Septiembre) -->
+                        <div class="gallery-item-mobile flex-shrink-0 w-full p-6 text-center">
+                            <h2 class="text-2xl font-semibold text-gray-800 mb-4">5 de Septiembre</h2>
+                            <p class="text-sm text-gray-600 mb-6">Mi Cumpleaños</p>
+                            <img src="images/05 de 09 de 2025_foto1.jpg" alt="Mi Cumpleaños" class="w-full h-auto rounded-lg shadow-md">
+                            <div class="video-wrapper mt-4">
+                                <video controls class="w-full h-full rounded-lg shadow-md">
+                                    <source src="images/05 de 09 de 2025_video.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <div id="right-aside" class="scroll-item w-[80vw] bg-gray-200 p-6 flex-shrink-0 overflow-y-auto">
+            <h2 class="text-xl font-bold mb-4">Menú Derecho</h2>
+            <div class="bg-white rounded-lg p-4 shadow-md mb-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">El Valor del Programador</h3>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                    El profesionalismo y la ética de un programador se basan en reglas, principios y normas que siempre hay que seguir.
+                </p>
+				<p>
+					comdiante
+				</p>
+				<iframe width="100%" height="200px" src="https://www.youtube.com/embed/TmKShlqZD18" title="YA ME QUIERO IR A MI CASA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        const scrollContainer = document.querySelector('.scroll-container');
+        const mainContent = document.getElementById('main-content');
+        const galleryTrack = document.getElementById('gallery-track');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentGalleryIndex = 0;
+
+        if (scrollContainer) {
+            window.onload = () => {
+                scrollContainer.scrollLeft = mainContent.offsetLeft;
+            };
+        }
+
+        if (galleryTrack) {
+            const galleryItems = galleryTrack.querySelectorAll('.gallery-item');
+            const totalItems = galleryItems.length;
+
+            nextBtn.addEventListener('click', () => {
+                currentGalleryIndex = (currentGalleryIndex + 1) % totalItems;
+                updateGalleryPosition();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                currentGalleryIndex = (currentGalleryIndex - 1 + totalItems) % totalItems;
+                updateGalleryPosition();
+            });
+
+            const updateGalleryPosition = () => {
+                const itemWidth = galleryItems[0].offsetWidth;
+                galleryTrack.style.transform = `translateX(${-currentGalleryIndex * itemWidth}px)`;
+            };
+
+            // Mobile gallery functionality
+            const galleryTrackMobile = document.getElementById('gallery-track-mobile');
+            const galleryItemsMobile = galleryTrackMobile.querySelectorAll('.gallery-item-mobile');
+            const totalItemsMobile = galleryItemsMobile.length;
+            let currentMobileIndex = 0;
+
+            let startX = 0;
+            let endX = 0;
+
+            galleryTrackMobile.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            galleryTrackMobile.addEventListener('touchmove', (e) => {
+                endX = e.touches[0].clientX;
+            });
+
+            galleryTrackMobile.addEventListener('touchend', () => {
+                const swipeThreshold = 50;
+                if (startX - endX > swipeThreshold) {
+                    currentMobileIndex = (currentMobileIndex + 1) % totalItemsMobile;
+                } else if (endX - startX > swipeThreshold) {
+                    currentMobileIndex = (currentMobileIndex - 1 + totalItemsMobile) % totalItemsMobile;
+                }
+                updateMobileGalleryPosition();
+            });
+
+            const updateMobileGalleryPosition = () => {
+                const itemWidthMobile = galleryItemsMobile[0].offsetWidth;
+                galleryTrackMobile.style.transform = `translateX(${-currentMobileIndex * itemWidthMobile}px)`;
+            };
+        }
+        
+        // Mobile navigation function
+        window.scrollToSection = (sectionId) => {
+
+		}
+	</script>
+         </aside>
+    <!--FIN DE LAYOUT-->
+    </div>
+    
+    
+    
+  <div class="footer">-
+      <span id="currentTime" style="color:black;"></span>
+    <span>
+    <div>
+      © 2025 Os clef.
+    </div>
+    </span>
+    <div>
+      <span>
+      
+  
+      <a href="#" style="color:#fff;">Contacto</a>
+   </span>
+    </div>
+
+  </div>
+  
+  
+    <script>
+    document.getElementById('loginForm').onsubmit = function (e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      localStorage.setItem('userId', username);
+      document.getElementById('loginStatus').textContent = 'Sesión iniciada como: ' + username;
+    }
+  </script>
+
+  <script>
+    // Actualiza la hora
+    function showTime() {
+      document.getElementById('currentTime').textContent = new Date().toLocaleTimeString();
+    }
+    setInterval(showTime, 1000); showTime();
+
+    // Sidebar
+    function openSidebar() {
+      document.getElementById('sidebar').classList.add('active');
+      document.getElementById('sidebarOverlay').classList.add('active');
+    }
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('active');
+      document.getElementById('sidebarOverlay').classList.remove('active');
+    }
+
+    // Buscador básico
+    function searchContent() {
+      var input = document.getElementById('searchInput').value.toLowerCase();
+      var cards = document.querySelectorAll('.card');
+      cards.forEach(function (card) {
+        card.style.display = card.textContent.toLowerCase().includes(input) ? '' : 'none';
+      });
+    }
+ </script>
+
+
+//  <p></p>
+//  <!-- Project -->
+  <script src="main.js"></script>
+</body>
+</html>
+: 'none';
+      });
+    }
+  </script>
+
+ 
+ 
+
+</body>
+</html>
